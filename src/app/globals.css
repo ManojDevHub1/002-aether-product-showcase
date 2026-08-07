@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-obsidian: #07080b;
+    --surface-basalt: #0f1116;
+    --surface-slate: #16181e;
+    --text-titanium: #e2e4e9;
+    --text-white: #f7f8fa;
+    --text-muted: #8a909e;
+    --accent-teal: #00f5d4;
+    --accent-amber: #ff6b35;
+    --glass-fill: rgba(255, 255, 255, 0.03);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.16);
+  }
+
+  html {
+    color-scheme: dark;
+    background-color: var(--bg-obsidian);
+    color: var(--text-titanium);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 0%, #0f1117 0%, #07080b 100%);
+    background-attachment: fixed;
+    color: var(--text-titanium);
+    overflow-x: hidden;
+    selection-background-color: var(--accent-teal);
+    selection-color: #07080b;
+  }
+
+  ::selection {
+    background-color: var(--accent-teal);
+    color: #07080b;
+  }
+
+  /* Core Web Vitals Render Containment & Layer Isolation */
+  #product-reveal,
+  #experience,
+  #showcase,
+  #gallery,
+  #specs,
+  #trust,
+  #pre-order,
+  #final-cta,
+  #footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Glassmorphism & GPU Accelerated Utility Classes */
+@layer utilities {
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .glass-panel-pill {
+    background-color: rgba(7, 8, 11, 0.65);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .glass-panel-elevated {
+    background-color: rgba(15, 17, 22, 0.85);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .titanium-button {
+    background: linear-gradient(135deg, #e2e4e9 0%, #b0b4be 100%);
+    color: #07080b;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(226, 228, 233, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: translateZ(0);
+  }
+
+  .titanium-button:hover {
+    box-shadow: 0 0 30px rgba(0, 245, 212, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    transform: translateY(-1px) scale(1.02) translateZ(0);
+  }
+
+  .text-glow-teal {
+    text-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
+  }
+
+  .bg-glow-teal {
+    box-shadow: 0 0 32px rgba(0, 245, 212, 0.25);
+  }
+
+  .glow-dot-teal {
+    box-shadow: 0 0 12px #00f5d4;
+  }
+
+  /* Utility for hiding scrollbars cleanly */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Scrollbar for Atmospheric Luxury */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07080b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 245, 212, 0.5);
 }
